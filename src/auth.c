@@ -6,7 +6,6 @@ static bool is_auth = false;
 static char current_user[50] = "";
 
 bool authenticate(const char* username, const char* password) {
-    // Простая проверка (в реальном проекте используйте хеширование!)
     if (strcmp(username, "admin") == 0 && strcmp(password, "admin123") == 0) {
         is_auth = true;
         strcpy(current_user, username);
