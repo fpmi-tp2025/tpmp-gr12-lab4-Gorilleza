@@ -3,6 +3,7 @@
 #include "auth.h"
 #include "country.h"
 #include "region.h"
+#include "database.h"
 
 void print_menu() {
     printf("\nCountry Management System\n");
@@ -25,15 +26,19 @@ int main() {
     int choice;
     while (1) {
         print_menu();
-        scanf("%d", &choice);
+        if (scanf("%d", &choice) != 1) {
+            printf("Invalid input\n");
+            while (getchar() != '\n'); // Clear input buffer
+            continue;
+        }
         
         switch (choice) {
             case 1: {
                 char username[50], password[50];
                 printf("Username: ");
-                scanf("%s", username);
+                scanf("%49s", username);
                 printf("Password: ");
-                scanf("%s", password);
+                scanf("%49s", password);
                 
                 if (authenticate(username, password)) {
                     printf("Login successful!\n");
@@ -55,9 +60,9 @@ int main() {
                 long population;
                 
                 printf("Country name: ");
-                scanf("%s", name);
+                scanf("%99s", name);
                 printf("Capital: ");
-                scanf("%s", capital);
+                scanf("%99s", capital);
                 printf("Population: ");
                 scanf("%ld", &population);
                 
@@ -66,26 +71,6 @@ int main() {
                 } else {
                     printf("Failed to add country!\n");
                 }
-                break;
-            }
-            case 4: {
-                int country_id;
-                printf("Enter country ID: ");
-                scanf("%d", &country_id);
-                list_country_regions(country_id);
-                break;
-            }
-            case 5: {
-                int country_id;
-                printf("Enter country ID: ");
-                scanf("%d", &country_id);
-                double avg = get_average_region_population(country_id);
-                printf("Average population: %.2f\n", avg);
-                break;
-            }
-            case 6: {
-                long total = get_total_population();
-                printf("Total population: %ld\n", total);
                 break;
             }
             case 7:
