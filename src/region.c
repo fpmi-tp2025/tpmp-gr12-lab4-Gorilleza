@@ -1,6 +1,6 @@
 #include <sqlite3.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdbool.h>
 #include "database.h"
 #include "region.h"
 
@@ -50,7 +50,7 @@ void list_country_regions(int country_id) {
     
     printf("\nID\tRegion\t\tPopulation\n");
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        printf("%d\t%s\t%ld\n",
+        printf("%d\t%s\t%lld\n",  // Изменено с %ld на %lld
                sqlite3_column_int(stmt, 0),
                sqlite3_column_text(stmt, 1),
                sqlite3_column_int64(stmt, 2));
