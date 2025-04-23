@@ -3,13 +3,13 @@
 # Компилятор
 CC = gcc
 # Флаги компиляции
-CFLAGS = -Iincludes -Wall -Wextra
+CFLAGS = -Iincludes -Wall -Wextra -std=c11
 # Библиотеки
 LIBS = -lsqlite3
 # Имя исполняемого файла
 TARGET = bin/country_manager
 
-# Исходные файлы (все .c файлы из папки src)
+# Исходные файлы
 SRC_DIR = src
 SRC = $(wildcard $(SRC_DIR)/*.c)
 OBJ = $(patsubst $(SRC_DIR)/%.c,build/%.o,$(SRC))
@@ -42,13 +42,4 @@ run: $(TARGET)
 	@echo "=== Запуск программы ==="
 	./$(TARGET)
 
-# Справка
-help:
-	@echo "Доступные команды:"
-	@echo "  make       - собрать проект"
-	@echo "  make clean - удалить все сгенерированные файлы"
-	@echo "  make rebuild - пересобрать проект с нуля"
-	@echo "  make run   - собрать и сразу запустить"
-	@echo "  make help  - показать эту справку"
-
-.PHONY: all clean rebuild run help
+.PHONY: all clean rebuild run
