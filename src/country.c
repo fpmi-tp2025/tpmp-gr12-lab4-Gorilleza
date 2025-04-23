@@ -14,7 +14,7 @@ void list_countries() {
     
     printf("\nID\tName\t\tCapital\tPopulation\n");
     while (sqlite3_step(stmt) == SQLITE_ROW) {
-        printf("%d\t%s\t%s\t%ld\n",
+        printf("%d\t%s\t%s\t%lld\n",
                sqlite3_column_int(stmt, 0),
                sqlite3_column_text(stmt, 1),
                sqlite3_column_text(stmt, 2),
