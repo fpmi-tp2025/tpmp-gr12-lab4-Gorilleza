@@ -1,6 +1,9 @@
 #ifndef COUNTRY_H
 #define COUNTRY_H
 
+#include <stdbool.h>
+#include "database.h"
+
 typedef struct {
     int id;
     char name[100];
