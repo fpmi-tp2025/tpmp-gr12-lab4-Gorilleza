@@ -22,4 +22,8 @@ build/%.o: $(SRC_DIR)/%.c
 clean:
 	rm -rf build bin
 
-.PHONY: all clean
+run: $(TARGET)
+	@echo "=== Running application ==="
+	./$(TARGET)
+
+.PHONY: all clean run
