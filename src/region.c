@@ -6,7 +6,7 @@
 
 bool add_region(int country_id, const char* name, long population) {
     sqlite3_stmt *stmt;
-    const char *sql = "INSERT INTO region (country_id, name, population) VALUES (?, ?, ?);";
+    const char *sql = "INSERT INTO region (country_id, name, population_region) VALUES (?, ?, ?);";
     
     if (sqlite3_prepare_v2(get_db_connection(), sql, -1, &stmt, NULL) != SQLITE_OK) {
         printf("Cannot prepare statement: %s\n", sqlite3_errmsg(get_db_connection()));
@@ -24,7 +24,7 @@ bool add_region(int country_id, const char* name, long population) {
 
 void list_country_regions(int country_id) {
     sqlite3_stmt *stmt;
-    const char *sql = "SELECT id, name, population FROM region WHERE country_id = ?;";
+    const char *sql = "SELECT id, name, population_region FROM region WHERE country_id = ?;";
     
     if (sqlite3_prepare_v2(get_db_connection(), sql, -1, &stmt, NULL) != SQLITE_OK) {
         printf("Cannot prepare statement: %s\n", sqlite3_errmsg(get_db_connection()));
@@ -45,7 +45,7 @@ void list_country_regions(int country_id) {
 
 double get_average_region_population(int country_id) {
     sqlite3_stmt *stmt;
-    const char *sql = "SELECT AVG(population) FROM region WHERE country_id = ?;";
+    const char *sql = "SELECT AVG(population_region) FROM region WHERE country_id = ?;";
     double avg = 0.0;
     
     if (sqlite3_prepare_v2(get_db_connection(), sql, -1, &stmt, NULL) == SQLITE_OK) {
@@ -60,7 +60,7 @@ double get_average_region_population(int country_id) {
 
 long get_total_population() {
     sqlite3_stmt *stmt;
-    const char *sql = "SELECT SUM(population) FROM Country;";
+    const char *sql = "SELECT SUM(population_country) FROM Country;";
     long total = 0;
     
     if (sqlite3_prepare_v2(get_db_connection(), sql, -1, &stmt, NULL) == SQLITE_OK) {
