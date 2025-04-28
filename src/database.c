@@ -3,7 +3,6 @@
 #include <stdbool.h>
 #include "database.h"
 
-// Убираем static отсюда
 sqlite3 *db;
 
 bool init_database(const char* db_path) {
@@ -15,7 +14,9 @@ bool init_database(const char* db_path) {
 }
 
 void close_database() {
-    sqlite3_close(db);
+    if (db) {
+        sqlite3_close(db);
+    }
 }
 
 sqlite3* get_db_connection() {
