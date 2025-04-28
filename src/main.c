@@ -28,7 +28,7 @@ int main() {
         print_menu();
         if (scanf("%d", &choice) != 1) {
             printf("Invalid input\n");
-            while (getchar() != '\n'); // Clear input buffer
+            while (getchar() != '\n');
             continue;
         }
         
@@ -71,6 +71,26 @@ int main() {
                 } else {
                     printf("Failed to add country!\n");
                 }
+                break;
+            }
+            case 4: {
+                int country_id;
+                printf("Enter country ID: ");
+                scanf("%d", &country_id);
+                list_country_regions(country_id);
+                break;
+            }
+            case 5: {
+                int country_id;
+                printf("Enter country ID: ");
+                scanf("%d", &country_id);
+                double avg = get_average_region_population(country_id);
+                printf("Average population: %.2f\n", avg);
+                break;
+            }
+            case 6: {
+                long total = get_total_population();
+                printf("Total population: %ld\n", total);
                 break;
             }
             case 7:
