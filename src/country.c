@@ -1,11 +1,12 @@
 #include <sqlite3.h>
 #include <stdio.h>
+#include <string.h>
 #include "database.h"
 #include "country.h"
 
 void list_countries() {
     sqlite3_stmt *stmt;
-    const char *sql = "SELECT id, name, capital, population FROM countries;";
+    const char *sql = "SELECT id, name, capital, population FROM Country;";
     
     if (sqlite3_prepare_v2(get_db_connection(), sql, -1, &stmt, NULL) != SQLITE_OK) {
         printf("Cannot prepare statement: %s\n", sqlite3_errmsg(get_db_connection()));
@@ -25,7 +26,7 @@ void list_countries() {
 
 bool add_country(const char* name, const char* capital, long population) {
     sqlite3_stmt *stmt;
-    const char *sql = "INSERT INTO countries (name, capital, population) VALUES (?, ?, ?);";
+    const char *sql = "INSERT INTO Country (name, capital, population) VALUES (?, ?, ?);";
     
     if (sqlite3_prepare_v2(get_db_connection(), sql, -1, &stmt, NULL) != SQLITE_OK) {
         printf("Cannot prepare statement: %s\n", sqlite3_errmsg(get_db_connection()));
